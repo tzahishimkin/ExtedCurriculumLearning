@@ -13,7 +13,7 @@ from Utils.common import grad_step, net_norm, count_correct, get_loss_criterion,
 def get_objective(prior_model, prm, mb_data_loaders, mb_iterators, mb_posteriors_models, loss_criterion, n_train_tasks):
     '''  Calculate objective based on tasks in meta-batch '''
     # note: it is OK if some tasks appear several times in the meta-batch
- 
+
     n_tasks_in_mb = len(mb_data_loaders)
 
     sum_empirical_loss = 0
