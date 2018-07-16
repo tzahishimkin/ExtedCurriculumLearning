@@ -19,8 +19,11 @@ def learn(data_set):
     n_samples_list = [task_data.shape[0] for task_data in data_set]
 
     # Init weights:
-    w = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
-
+    from Utils import config
+    if config.USE_GPU:
+        w = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+    else:
+        w = Variable(torch.randn(n_tasks, n_dim), requires_grad=True)
     learning_rate = 1e-1
 
     # create your optimizer
@@ -36,8 +39,11 @@ def learn(data_set):
         batch_size_curr = min(n_samples_list[b_task], batch_size)
         batch_inds = np.random.choice(n_samples_list[b_task], batch_size_curr, replace=False)
         task_data = torch.from_numpy(data_set[b_task][batch_inds])
-        task_data = Variable(task_data.cuda(), requires_grad=False)
-
+        from Utils import config
+        if config.USE_GPU:
+            task_data = Variable(task_data.cuda(), requires_grad=False)
+        else:
+            task_data = Variable(task_data, requires_grad=False)
         # Loss:
         loss = (w[b_task] - task_data).pow(2).mean()
 

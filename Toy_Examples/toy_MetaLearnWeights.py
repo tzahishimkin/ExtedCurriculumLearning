@@ -17,11 +17,19 @@ def learn(data_set, complexity_type):
     n_samples_list = [task_data.shape[0] for task_data in data_set]
 
     # Define prior:
-    w_P_mu = Variable(torch.randn(n_dim).cuda(), requires_grad=True)
-    w_P_log_var = Variable(torch.randn(n_dim).cuda(), requires_grad=True)
+    from Utils import config
+    if config.USE_GPU:
+        w_P_mu = Variable(torch.randn(n_dim).cuda(), requires_grad=True)
+        w_P_log_var = Variable(torch.randn(n_dim).cuda(), requires_grad=True)
 
-    # Init posteriors:
-    w_post = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+        # Init posteriors:
+        w_post = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+    else:
+        w_P_mu = Variable(torch.randn(n_dim), requires_grad=True)
+        w_P_log_var = Variable(torch.randn(n_dim), requires_grad=True)
+
+        # Init posteriors:
+        w_post = Variable(torch.randn(n_tasks, n_dim), requires_grad=True)
 
     learning_rate = 1e-1
 
@@ -38,8 +46,11 @@ def learn(data_set, complexity_type):
         batch_size_curr = min(n_samples_list[b_task], batch_size)
         batch_inds = np.random.choice(n_samples_list[b_task], batch_size_curr, replace=False)
         task_data = torch.from_numpy(data_set[b_task][batch_inds])
-        task_data = Variable(task_data.cuda(), requires_grad=False)
-
+        from Utils import config
+        if config.USE_GPU:
+            task_data = Variable(task_data.cuda(), requires_grad=False)
+        else:
+            task_data = Variable(task_data, requires_grad=False)
         # Empirical Loss:
         w_task = w_post[b_task] # The posterior corresponding to the task in the batch
         empirical_loss = (w_task - task_data).pow(2).mean() # mean over samples and over dimensions

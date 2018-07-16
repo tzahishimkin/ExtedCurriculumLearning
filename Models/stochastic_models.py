@@ -66,7 +66,9 @@ def get_model(prm, model_type='Stochastic'):
     else:
         raise ValueError('Invalid model_name')
 
-    model.cuda() # always use GPU
+    from Utils.config import USE_GPU
+    if not USE_GPU:
+        model.cuda() # always use GPU
     init_layers(model, prm.log_var_init) # init model
 
     # For debug: set the STD of epsilon variable for re-parametrization trick (default=1.0)

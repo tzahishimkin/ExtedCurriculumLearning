@@ -26,7 +26,7 @@ def init_module(m, log_var_init):
         m.weight.data.uniform_(-stdv, stdv)
         if m.bias is not None:
             m.bias.data.uniform_(-stdv, +stdv)
- 
+
     # Linear standard
     elif isinstance(m, nn.Linear):
         n = m.weight.size(1)

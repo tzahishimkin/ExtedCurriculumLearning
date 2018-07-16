@@ -51,8 +51,13 @@ def batchnorm(input, weight=None, bias=None, running_mean=None, running_var=None
     # This hack only works when momentum is 1 and avoids needing to track running stats
     # by substuting dummy variables
     in_dim = input.data.size()[1]
-    running_mean = torch.zeros(in_dim).cuda()
-    running_var = torch.ones(in_dim).cuda()
+    from Utils.config import USE_GPU
+    if USE_GPU:
+        running_mean = torch.zeros(in_dim).cuda()
+        running_var = torch.ones(in_dim).cuda()
+    else:
+        running_mean = torch.zeros(in_dim)
+        running_var = torch.ones(in_dim)
     return F.batch_norm(input, running_mean, running_var, weight, bias, training, momentum, eps)
 
 # -------------------------------------------------------------------------------------------

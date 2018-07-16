@@ -19,14 +19,23 @@ def learn(data_set):
 
     # Define prior:
     learn_prior_flag = True
-    w_P_mu = Variable(torch.zeros(n_dim).cuda(), requires_grad=False)
-    w_P_log_sigma = Variable(torch.zeros(n_dim).cuda(), requires_grad=False)
-    sigma_sqr_prior = torch.exp(2 * w_P_log_sigma)
+    from Utils import config
+    if config.USE_GPU:
+        w_P_mu = Variable(torch.zeros(n_dim).cuda(), requires_grad=False)
+        w_P_log_sigma = Variable(torch.zeros(n_dim).cuda(), requires_grad=False)
+        sigma_sqr_prior = torch.exp(2 * w_P_log_sigma)
 
-    # Init posteriors:
-    w_mu = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
-    w_log_sigma = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+        # Init posteriors:
+        w_mu = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+        w_log_sigma = Variable(torch.randn(n_tasks, n_dim).cuda(), requires_grad=True)
+    else:
+        w_P_mu = Variable(torch.zeros(n_dim), requires_grad=False)
+        w_P_log_sigma = Variable(torch.zeros(n_dim), requires_grad=False)
+        sigma_sqr_prior = torch.exp(2 * w_P_log_sigma)
 
+        # Init posteriors:
+        w_mu = Variable(torch.randn(n_tasks, n_dim), requires_grad=True)
+        w_log_sigma = Variable(torch.randn(n_tasks, n_dim), requires_grad=True)
 
     learning_rate = 1e-1
 
@@ -43,11 +52,18 @@ def learn(data_set):
         batch_size_curr = min(n_samples_list[b_task], batch_size)
         batch_inds = np.random.choice(n_samples_list[b_task], batch_size_curr, replace=False)
         task_data = torch.from_numpy(data_set[b_task][batch_inds])
-        task_data = Variable(task_data.cuda(), requires_grad=False)
-
+        from Utils import config
+        if config.USE_GPU:
+            task_data = Variable(task_data.cuda(), requires_grad=False)
+        else:
+            task_data = Variable(task_data, requires_grad=False)
         # Re-Parametrization:
         w_sigma = torch.exp(w_log_sigma[b_task])
-        epsilon = Variable(torch.randn(n_dim).cuda(), requires_grad=False)
+        from Utils import config
+        if config.USE_GPU:
+            epsilon = Variable(torch.randn(n_dim).cuda(), requires_grad=False)
+        else:
+            epsilon = Variable(torch.randn(n_dim), requires_grad=False)
         w = w_mu[b_task] + w_sigma * epsilon
 
         # Empirical Loss:
