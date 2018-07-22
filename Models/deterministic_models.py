@@ -218,7 +218,8 @@ class OmConvNet(base_model):
 
         # Initialize weights
         self._init_weights()
-        if use_gpu:
+        from Utils.config import USE_GPU
+        if USE_GPU:
             self.cuda()  # always use GPU
 
     def _forward_conv_layers(self, x, weights=None):

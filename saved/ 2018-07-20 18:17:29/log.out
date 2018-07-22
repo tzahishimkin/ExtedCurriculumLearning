@@ -1,0 +1,5 @@
+Log file created at  2018-07-20 18:17:29
+Run script: /home/tzahi/Thesis/ExtendCurriculumLearning/MAML/main_MAML.py
+Parameters:
+Namespace(K_Shot_MetaTest=5, K_Shot_MetaTrain=5, MAML_Use_Test_Data=False, N_Way=5, alpha=0.4, batch_size=128, chars_split_type='random', data_path='/home/tzahi/Thesis/ML_data_sets', data_source='Omniglot', data_transform='Rotate90', limit_train_samples_in_test_tasks=0, load_model_path='', loss_type='CrossEntropy', lr=0.001, meta_batch_size=32, mode='MetaTrain', model_name='OmConvNet', n_meta_test_grad_steps=3, n_meta_train_chars=1200, n_meta_train_classes=200, n_meta_train_grad_steps=1, n_meta_train_iterations=15000, n_pixels_shuffles=300, n_test_tasks=10, n_train_tasks=0, result_dir='saved/ 2018-07-20 18:17:29', run_name=' 2018-07-20 18:17:29', seed=5, test_batch_size=128)
+--------------------------------------------------

@@ -11,10 +11,10 @@ def getdata(tasknames):
     
     for i,name in enumerate(tasknames):
 
-        X=numpy.loadtxt("data/%s_train.txt"%name)
+        X=numpy.loadtxt("TaskCurriculum/data/%s_train.txt"%name)
         X = numpy.c_[X,[1]*len(X)] 
 
-        testX = numpy.loadtxt("data/%s_test.txt"%name)    
+        testX = numpy.loadtxt("TaskCurriculum/data/%s_test.txt"%name)
         testX = numpy.c_[testX,[1]*len(testX)]  
 
         Y = numpy.r_[[+1]*50,[-1]*50]

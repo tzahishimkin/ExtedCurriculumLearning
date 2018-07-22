@@ -163,6 +163,46 @@ def load_MNIST(final_input_trans, target_trans, prm):
     return train_dataset, test_dataset
 
 
+def load_permuted_MNIST(src_DS, dst_DS, final_input_trans, target_trans, prm):
+    """
+    If a source dataset path has been given, operate permutation on it. Otherwise, load MNIST from Web
+    :param src_DS:
+    :param dst_DS:
+    :param final_input_trans:
+    :param target_trans:
+    :param prm:
+    :return:
+    """
+    # Data transformations list:
+    transform = [transforms.ToTensor()]
+
+    # Normalize values:
+    # Note: original values  in the range [0,1]
+
+    # MNIST_MEAN = (0.1307,)  # (0.5,)
+    # MNIST_STD = (0.3081,)  # (0.5,)
+    # transform += transforms.Normalize(MNIST_MEAN, MNIST_STD)
+
+    transform += [transforms.Normalize((0.5,), (0.5,))]  # transform to [-1,1]
+
+    if final_input_trans:
+        transform += final_input_trans
+
+    if src_DS:
+        src_full_path = os.path.join(prm.data_path, src_DS)
+        assert os.path.isdir(src_full_path), "DS wasn't found in path"
+        dst_path = os.path.join(prm.data_path, dst_DS)
+        # Train set:
+        train_dataset = datasets.MNIST(dst_path, train=True, download=True,
+                                       transform=transforms.Compose(transform), target_transform=transforms.Compose(target_trans))
+
+        # Test set:
+        test_dataset = datasets.MNIST(dst_path, train=False,
+                                      transform=transforms.Compose(transform), target_transform=transforms.Compose(target_trans))
+
+
+    return train_dataset, test_dataset
+
 
 def load_CIFAR(final_input_trans, target_trans, prm):
 

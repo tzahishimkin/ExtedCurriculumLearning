@@ -1,0 +1,5 @@
+Log file created at  2018-07-17 00:35:27
+Run script: /home/tzahi/Thesis/ExtendCurriculumLearning/Single_Task/main_single_standard.py
+Parameters:
+Namespace(K_Shot_MetaTest=100, K_Shot_MetaTrain=100, N_Way=5, batch_size=128, chars_split_type='random', data_path='/home/tzahi/Thesis/ExtendCurriculumLearning/ML_data_sets', data_source='MNIST', data_transform='None', limit_train_samples=0, loss_type='CrossEntropy', lr=0.001, model_name='OmConvNet', n_meta_train_chars=1200, n_meta_train_classes=200, num_epochs=50, result_dir='saved/ 2018-07-17 00:35:27', run_name=' 2018-07-17 00:35:27', seed=1, test_batch_size=128)
+--------------------------------------------------

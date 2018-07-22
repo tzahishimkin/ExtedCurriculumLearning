@@ -1,0 +1,38 @@
+Log file created at  2018-07-17 01:07:40
+Run script: main_Meta_Bayes.py
+Parameters:
+Namespace(K_Shot_MetaTest=100, K_Shot_MetaTrain=100, N_Way=5, batch_size=128, chars_split_type='random', complexity_type='NewBoundSeeger', data_path='/home/tzahi/Thesis/ExtendCurriculumLearning/ML_data_sets', data_source='MNIST', data_transform='Shuffled_Pixels', limit_train_samples_in_test_tasks=2000, load_model_path='', loss_type='CrossEntropy', lr=0.001, meta_batch_size=16, mode='MetaTrain', model_name='FcNet3', n_inner_steps=50, n_meta_test_epochs=200, n_meta_train_chars=1200, n_meta_train_classes=500, n_meta_train_epochs=150, n_pixels_shuffles=100, n_test_tasks=20, n_train_tasks=1, result_dir='saved/ShuffledPixels100_TasksN/1', run_name='ShuffledPixels100_TasksN/1', seed=1, test_batch_size=128)
+--------------------------------------------------
+--- Generating 1 training-tasks
+Stochastic-FcNet3
+---- Meta-Training set: 1 tasks
+Train Task 0, Test set: MaxPosterior -  Average loss: 0.001419, Accuracy: 0.98 (of 10000 samples)
+
+Run finished at:  2018-07-17 02:41:11
+MaxPosterior Average Test Error: 1.98%	 Runtime: 5609.7775321 [sec]
+Trained prior saved in saved/ShuffledPixels100_TasksN/1/model.pt
+---- Generating 20 test-tasks with at most 2000 training samples
+Meta-Testing with transferred prior....
+MaxPosterior Average Test Error: 3.61%	 Runtime: 248.736540079 [sec]
+MaxPosterior Average Test Error: 4.77%	 Runtime: 248.115556955 [sec]
+MaxPosterior Average Test Error: 3.54%	 Runtime: 248.665500879 [sec]
+MaxPosterior Average Test Error: 3.63%	 Runtime: 248.905200005 [sec]
+MaxPosterior Average Test Error: 3.36%	 Runtime: 249.137028933 [sec]
+MaxPosterior Average Test Error: 3.43%	 Runtime: 249.753311872 [sec]
+MaxPosterior Average Test Error: 3.65%	 Runtime: 248.676842928 [sec]
+MaxPosterior Average Test Error: 3.44%	 Runtime: 154637.041509 [sec]
+MaxPosterior Average Test Error: 3.73%	 Runtime: 287.120555878 [sec]
+MaxPosterior Average Test Error: 3.63%	 Runtime: 309.316828012 [sec]
+MaxPosterior Average Test Error: 4.07%	 Runtime: 265.886780024 [sec]
+MaxPosterior Average Test Error: 3.53%	 Runtime: 256.028338909 [sec]
+MaxPosterior Average Test Error: 3.66%	 Runtime: 255.959781885 [sec]
+MaxPosterior Average Test Error: 3.83%	 Runtime: 253.960402966 [sec]
+MaxPosterior Average Test Error: 3.32%	 Runtime: 256.979522943 [sec]
+MaxPosterior Average Test Error: 3.1%	 Runtime: 255.059273958 [sec]
+MaxPosterior Average Test Error: 4.23%	 Runtime: 255.339815855 [sec]
+MaxPosterior Average Test Error: 3.68%	 Runtime: 254.258509874 [sec]
+MaxPosterior Average Test Error: 4.15%	 Runtime: 255.839108944 [sec]
+MaxPosterior Average Test Error: 3.8%	 Runtime: 255.370407104 [sec]
+Total runtime: 09 hours, 01 minutes and 39 seconds
+----- Final Results: 
+----- Meta-Testing - Avg test err: 3.71%, STD: 0.363%

@@ -67,7 +67,7 @@ def get_model(prm, model_type='Stochastic'):
         raise ValueError('Invalid model_name')
 
     from Utils.config import USE_GPU
-    if not USE_GPU:
+    if USE_GPU:
         model.cuda() # always use GPU
     init_layers(model, prm.log_var_init) # init model
 

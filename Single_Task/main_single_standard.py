@@ -38,7 +38,7 @@ parser.add_argument('--data-transform', type=str, help="Data transformation:  'N
 
 parser.add_argument('--limit_train_samples', type=int,
                     help='Upper limit for the number of training samples (0 = unlimited)',
-                    default=0)
+                    default=500)
 
 # N-Way K-Shot Parameters:
 parser.add_argument('--N_Way', type=int, help='Number of classes in a task (for Omniglot)',

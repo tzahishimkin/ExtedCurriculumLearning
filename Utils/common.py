@@ -42,13 +42,20 @@ def get_param_from_model(model, param_name):
 def zeros_gpu(size):
     if not isinstance(size, tuple):
         size = (size,)
-    return torch.cuda.FloatTensor(*size).fill_(0)
+    from Utils.config import USE_GPU
+    if USE_GPU:
+        return torch.cuda.FloatTensor(*size).fill_(0)
+    else:
+        return torch.FloatTensor(*size).fill_(0)
 
 def randn_gpu(size, mean=0, std=1):
     if not isinstance(size, tuple):
         size = (size,)
-    return torch.cuda.FloatTensor(*size).normal_(mean, std)
-
+    from Utils.config import USE_GPU
+    if USE_GPU:
+        return torch.cuda.FloatTensor(*size).normal_(mean, std)
+    else:
+        return torch.FloatTensor(*size).normal_(mean, std)
 
 def count_correct(outputs, targets):
     ''' Deterimne the class prediction by the max output and compare to ground truth'''
