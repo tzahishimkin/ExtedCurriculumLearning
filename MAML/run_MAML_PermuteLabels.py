@@ -32,7 +32,7 @@ if run_learning:
             mode = 'MetaTrain'
         else:
             mode = 'LoadMetaModel'
-        call(['python', 'main_MAML.py',
+        call(['python', 'PriorMetaLearning/main_MAML.py',
               '--run-name', sub_runs_names[i_run],
               '--mode', mode,
               '--load_model_path', root_saved_dir + base_run_name + '/' + 'TestGrads_' +  str(meta_train_in_this_run) + '/model.pt',

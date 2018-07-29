@@ -34,7 +34,7 @@ sub_runs_names = [base_run_name + '/' + str(n_train_tasks) for n_train_tasks in 
 if run_experiments:
     start_time = timeit.default_timer()
     for i_run, n_train_tasks in enumerate(n_tasks_vec):
-        call(['python', 'main_Meta_Bayes.py',
+        call(['python', 'PriorMetaLearning/main_Meta_Bayes.py',
               '--run-name', sub_runs_names[i_run],
               '--data-source', 'MNIST',
               '--data-transform', 'Shuffled_Pixels',
