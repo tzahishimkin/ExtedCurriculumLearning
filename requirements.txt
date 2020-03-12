@@ -87,7 +87,7 @@ Pillow==4.2.1
 ppaquette-gym-doom==0.0.3
 prompt-toolkit==1.0.14
 protobuf==3.5.0
-psutil==5.2.2
+psutil==5.6.6
 ptyprocess==0.5.1
 pybullet==1.7.3
 pycocotools==2.0
